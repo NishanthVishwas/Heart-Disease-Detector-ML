@@ -1,0 +1,96 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <div class="logo">
+                    <svg class="heart-icon" viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#ff5252"></path>
+                    </svg>
+                    <h1>Heart<span>Guard</span></h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('index') }}" class="active">Home</a></li>
+                    <li><a href="{{ url_for('predict') }}">Predict</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main>
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Heart Disease Prediction</h1>
+                    <h2>Using Machine Learning</h2>
+                    <p>Early detection can save lives. Our advanced algorithm analyzes your health data to assess your risk of heart disease.</p>
+                    <a href="{{ url_for('predict') }}" class="cta-button">Try the Predictor</a>
+                </div>
+                <div class="hero-image pulse">
+                    <svg viewBox="0 0 24 24" class="heart-large">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#ff5252"></path>
+                    </svg>
+                </div>
+            </section>
+            
+            <section class="features">
+                <h2>Our Features</h2>
+                <div class="feature-cards">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <span class="icon">🔍</span>
+                        </div>
+                        <h3>Accurate Analysis</h3>
+                        <p>Our model has been trained on clinical data to provide accurate risk assessment.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <span class="icon">🧠</span>
+                        </div>
+                        <h3>Multiple ML Models</h3>
+                        <p>Choose from different machine learning algorithms for your prediction.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <span class="icon">📊</span>
+                        </div>
+                        <h3>Detailed Results</h3>
+                        <p>Receive probability scores along with prediction results.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="models">
+                <h2>Available Models</h2>
+                <div class="model-cards">
+                    <div class="model-card">
+                        <h3>Logistic Regression</h3>
+                        <p>A statistical model that uses a logistic function to model the probability of a certain class.</p>
+                    </div>
+                    <div class="model-card">
+                        <h3>Random Forest</h3>
+                        <p>An ensemble learning method that constructs multiple decision trees during training.</p>
+                    </div>
+                    <div class="model-card">
+                        <h3>Support Vector Machine</h3>
+                        <p>A supervised learning model that analyzes data for classification and regression analysis.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 HeartGuard - Heart Disease Prediction App</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!-- templates/predict.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Heart Disease</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <div class="logo">
+                    <svg class="heart-icon" viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#ff5252"></path>
+                    </svg>
+                    <h1>Heart<span>Guard</span></h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('predict') }}" class="active">Predict</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main>
+            <section class="form-section">
+                <h1>Heart Disease Prediction Form</h1>
+                <p class="form-intro">Please fill in your health information below for prediction.</p>
+                
+                <form action="{{ url_for('process') }}" method="post" id="heart-form">
+                    <div class="form-grid">
+                        <!-- Age input -->
+                        <div class="form-group">
+                            <label for="age">Age:</label>
+                            <input type="number" id="age" name="age" min="1" max="120" required>
+                        </div>
+                        
+                        <!-- Sex input -->
+                        <div class="form-group">
+                            <label for="sex">Sex (1 = Male, 0 = Female):</label>
+                            <select id="sex" name="sex" required>
+                                <option value="1">Male</option>
+                                <option value="0">Female</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Chest pain type -->
+                        <div class="form-group">
+                            <label for="cp">Chest Pain Type (0-3):</label>
+                            <select id="cp" name="cp" required>
+                                <option value="0">Typical Angina (0)</option>
+                                <option value="1">Atypical Angina (1)</option>
+                                <option value="2">Non-anginal Pain (2)</option>
+                                <option value="3">Asymptomatic (3)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Resting blood pressure -->
+                        <div class="form-group">
+                            <label for="trestbps">Resting Blood Pressure (mmHg):</label>
+                            <input type="number" id="trestbps" name="trestbps" min="80" max="200" required>
+                        </div>
+                        
+                        <!-- Serum cholesterol -->
+                        <div class="form-group">
+                            <label for="chol">Serum Cholesterol (mg/dl):</label>
+                            <input type="number" id="chol" name="chol" min="100" max="600" required>
+                        </div>
+                        
+                        <!-- Fasting blood sugar -->
+                        <div class="form-group">
+                            <label for="fbs">Fasting Blood Sugar > 120 mg/dl (1 = true, 0 = false):</label>
+                            <select id="fbs" name="fbs" required>
+                                <option value="0">False</option>
+                                <option value="1">True</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Resting electrocardiographic results -->
+                        <div class="form-group">
+                            <label for="restecg">Resting ECG Results (0-2):</label>
+                            <select id="restecg" name="restecg" required>
+                                <option value="0">Normal (0)</option>
+                                <option value="1">ST-T Wave Abnormality (1)</option>
+                                <option value="2">Left Ventricular Hypertrophy (2)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Maximum heart rate -->
+                        <div class="form-group">
+                            <label for="thalach">Maximum Heart Rate Achieved:</label>
+                            <input type="number" id="thalach" name="thalach" min="60" max="220" required>
+                        </div>
+                        
+                        <!-- Exercise induced angina -->
+                        <div class="form-group">
+                            <label for="exang">Exercise Induced Angina (1 = yes, 0 = no):</label>
+                            <select id="exang" name="exang" required>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                        
+                        <!-- ST depression -->
+                        <div class="form-group">
+                            <label for="oldpeak">ST Depression Induced by Exercise:</label>
+                            <input type="number" id="oldpeak" name="oldpeak" step="0.1" min="0" max="10" required>
+                        </div>
+                        
+                        <!-- Slope of the peak exercise ST segment -->
+                        <div class="form-group">
+                            <label for="slope">Slope of Peak Exercise ST Segment (0-2):</label>
+                            <select id="slope" name="slope" required>
+                                <option value="0">Upsloping (0)</option>
+                                <option value="1">Flat (1)</option>
+                                <option value="2">Downsloping (2)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Number of major vessels -->
+                        <div class="form-group">
+                            <label for="ca">Number of Major Vessels (0-4):</label>
+                            <select id="ca" name="ca" required>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Thalassemia -->
+                        <div class="form-group">
+                            <label for="thal">Thalassemia (0-3):</label>
+                            <select id="thal" name="thal" required>
+                                <option value="0">Normal (0)</option>
+                                <option value="1">Fixed Defect (1)</option>
+                                <option value="2">Reversible Defect (2)</option>
+                                <option value="3">Unknown (3)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Model selection -->
+                        <div class="form-group model-selection">
+                            <label for="model_choice">Select Prediction Model:</label>
+                            <select id="model_choice" name="model_choice" required>
+                                <option value="Logistic Regression">Logistic Regression</option>
+                                <option value="Random Forest">Random Forest</option>
+                                <option value="Support Vector Machine">Support Vector Machine</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="reset" class="reset-button">Reset Form</button>
+                        <button type="submit" class="submit-button">Predict</button>
+                    </div>
+                </form>
+                
+                <div class="form-tips">
+                    <h3>Tips for Accurate Results:</h3>
+                    <ul>
+                        <li>Provide the most recent medical test results</li>
+                        <li>Consult with a healthcare professional about your results</li>
+                        <li>This tool is for educational purposes only</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 HeartGuard - Heart Disease Prediction App</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!-- templates/results.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <div class="logo">
+                    <svg class="heart-icon" viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#ff5252"></path>
+                    </svg>
+                    <h1>Heart<span>Guard</span></h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('predict') }}">Predict</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main>
+            <section class="results-section">
+                <h1>Your Prediction Results</h1>
+                
+                <div class="results-card {% if result.prediction == 1 %}results-positive{% else %}results-negative{% endif %}">
+                    <div class="results-header">
+                        <h2>Prediction:</h2>
+                        <div class="prediction-result">
+                            {% if result.prediction == 1 %}
+                                <span class="result-positive">Higher Risk of Heart Disease</span>
+                            {% else %}
+                                <span class="result-negative">Lower Risk of Heart Disease</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="results-details">
+                        <div class="result-item">
+                            <strong>Model Used:</strong>
+                            <span>{{ result.model_used }}</span>
+                        </div>
+                        
+                        <div class="result-item">
+                            <strong>Probability:</strong>
+                            <span>{{ "%.2f"|format(result.probability * 100) }}%</span>
+                        </div>
+                        
+                        <div class="probability-bar">
+                            <div class="probability-fill" style="width: {{ result.probability * 100 }}%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="disclaimer">
+                        <strong>Disclaimer:</strong>
+                        <p>This prediction is based on machine learning models and should not replace professional medical advice. Please consult with a healthcare provider for proper diagnosis and treatment.</p>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <a href="{{ url_for('predict') }}" class="action-button">Make Another Prediction</a>
+                    <a href="{{ url_for('index') }}" class="action-button secondary">Return Home</a>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 HeartGuard - Heart Disease Prediction App</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
