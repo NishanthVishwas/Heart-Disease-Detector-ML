@@ -1,0 +1,17 @@
+# Ignore virtual environments
+venv/
+
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# VSCode settings (optional)
+.vscode/
+
+# MacOS hidden files (optional)
+.DS_Store
